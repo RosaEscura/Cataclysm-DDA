@@ -6032,6 +6032,23 @@
     "flags": [ "SPEAR" ]
   },
   {
+    "id": "shears",
+    "type": "TOOL",
+    "name": "shears",
+    "name_plural": "shears",
+    "description": "These are shears designed for gathering fluffy wool from sheep.",
+    "weight": 312,
+    "volume": 1,
+    "price": 400,
+    "to_hit": -2,
+    "cutting": 4,
+    "material": [ "aluminum", "plastic" ],
+    "symbol": ",",
+    "color": "light_gray",
+    "qualities": [ [ "CUT", 1 ],
+    "flags": [ "STAB" ]
+  },  
+  {
     "id": "scrambler",
     "type": "TOOL",
     "category": "weapons",
