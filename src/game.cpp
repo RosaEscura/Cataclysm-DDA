@@ -5949,6 +5949,7 @@ bool pet_menu( monster *z )
         play_with_pet,
         pheromone,
         milk,
+        shear,
         rope
     };
 
@@ -5991,6 +5992,10 @@ bool pet_menu( monster *z )
 
     if( z->has_flag( MF_MILKABLE ) ) {
         amenu.addentry( milk, true, 'm', _( "Milk %s" ), pet_name.c_str() );
+    }
+
+    if( z->has_flag( MF_SHEARABLE ) ) {
+        amenu.addentry( shear, true, 'm', _( "Shear %s" ), pet_name.c_str());
     }
 
     amenu.query();
@@ -6193,6 +6198,11 @@ bool pet_menu( monster *z )
             z->remove_effect( effect_tied );
         }
 
+        return true;
+    }
+
+    if( shear == choice ) {
+        monexamine::shear_source( *z );
         return true;
     }
 
