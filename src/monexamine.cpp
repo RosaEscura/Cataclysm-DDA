@@ -36,3 +36,22 @@ void monexamine::milk_source( monster &source_mon )
         add_msg( _( "The %s's udders run dry." ), source_mon.get_name().c_str() );
     }
 }
+
+const efftype_id effect_sheared( "sheared" );
+
+void monexamine::shear_source( monster &source_mon )
+{
+    const auto sheared_item = source_mon.type->starting_ammo;
+    const long wool_per_season = sheared_item.find( "wool_staple" )->second;
+    const time_duration shearing_freq = calendar::season_length();
+
+    item wool_staple( sheared_item.find( "wool_staple" )->first, calendar::turn, wool_per_season );
+
+    if( g->u.i_add( wool_staple ) ) {
+        add_msg( _( "You shear the %s." ), source_mon.get_name().c_str() );
+        source_mon.add_effect( effect_sheared, shearing_freq );
+
+    } else {
+        add_msg( _( "You finish shearing the %s." ), source_mon.get_name().c_str() );
+    }
+}
