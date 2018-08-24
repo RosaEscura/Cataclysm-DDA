@@ -5989,14 +5989,14 @@ bool pet_menu( monster *z )
     if (z->has_effect( effect_sheared)) {
         amenu.addentry(shear, false, 'w', _("This animal is not ready for shearing yet"));
     }
-    else {
-        if (g->u.has_quality("SHEAR", 1) {
+    else if(season_of_year(calendar::turn)==season_of_year(WINTER)){
+        amenu.addentry(shear, false, 'w', _("This animal would freeze solid if you sheared it now"));
+        } else if (g->u.has_quality("SHEAR", 1)) {
             amenu.addentry(shear, true, 'w', _("Shear"));
         }
         else {
             amenu.addentry(shear, false, 'w', _("You need an item you can shear with"));
         }
-    }
 
     if( z->type->in_species( ZOMBIE ) ) {
         amenu.addentry( pheromone, true, 't', _( "Tear out pheromone ball" ) );
