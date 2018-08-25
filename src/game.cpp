@@ -179,6 +179,7 @@ const efftype_id effect_onfire( "onfire" );
 const efftype_id effect_pacified( "pacified" );
 const efftype_id effect_pet( "pet" );
 const efftype_id effect_relax_gas( "relax_gas" );
+const efftype_id effect_sheared( "sheared" );
 const efftype_id effect_sleep( "sleep" );
 const efftype_id effect_stunned( "stunned" );
 const efftype_id effect_teleglow( "teleglow" );
@@ -5986,17 +5987,20 @@ bool pet_menu( monster *z )
         }
     }
 
-    if (z->has_effect( effect_sheared)) {
-        amenu.addentry(shear, false, 'w', _("This animal is not ready for shearing yet"));
-    }
-    else if(season_of_year(calendar::turn)==season_of_year(WINTER)){
-        amenu.addentry(shear, false, 'w', _("This animal would freeze solid if you sheared it now"));
-        } else if (g->u.has_quality("SHEAR", 1)) {
+    if (z->has_flag( MF_SHEARABLE ) ) {
+        if (z->has_effect(effect_sheared)) {
+            amenu.addentry(shear, false, 'w', _("This animal is not ready for shearing yet"));
+        }
+        else if (season_of_year(calendar::turn) == (WINTER)) {
+            amenu.addentry(shear, false, 'w', _("This animal would freeze solid if you sheared it now"));
+        }
+        else if (g->u.has_quality(string_id<quality>("SHEAR"), 1)) {
             amenu.addentry(shear, true, 'w', _("Shear"));
         }
         else {
             amenu.addentry(shear, false, 'w', _("You need an item you can shear with"));
         }
+    }
 
     if( z->type->in_species( ZOMBIE ) ) {
         amenu.addentry( pheromone, true, 't', _( "Tear out pheromone ball" ) );
@@ -6004,10 +6008,6 @@ bool pet_menu( monster *z )
 
     if( z->has_flag( MF_MILKABLE ) ) {
         amenu.addentry( milk, true, 'm', _( "Milk %s" ), pet_name.c_str() );
-    }
-
-    if( z->has_flag( MF_SHEARABLE ) ) {
-        amenu.addentry( shear, true, 'm', _( "Shear %s" ), pet_name.c_str());
     }
 
     amenu.query();
@@ -9398,7 +9398,7 @@ void butcher_submenu( map_stack &items, const std::vector<int> &corpses, int cor
     smenu.addentry_col( QUARTER, true, 'k', _( "Quarter corpse" ), cut_time( QUARTER ),
                         _( "By quartering a previously field dressed corpse you will acquire four parts with reduced weight and volume.  It may help in transporting large game.  This action destroys skin, hide, pelt, etc., so don't use it if you want to harvest them later." ) );
     smenu.addentry_col( DISSECT, true, 'd', _( "Dissect corpse" ), cut_time( DISSECT ),
-                        _( "By careful dissection of the corpse, you will examine it for possible bionic implants, and harvest them if possible.  Requires scalpel-grade cutting tools, ruins corpse, and consumes lot of time.  Your medical knowledge is most useful here." ) );
+                        _( "By careful dissection of the corpse, you will examine it for possible bionic implants, and harvest them if possible.  Requires scalpel-grade cutting tools, ruins corpse, and consumes a lot of time.  Your medical knowledge is most useful here." ) );
     smenu.query();
     switch( smenu.ret ) {
         case BUTCHER:

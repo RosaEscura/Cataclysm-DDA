@@ -168,6 +168,11 @@
   },
   {
     "type": "tool_quality",
+    "id": "SHEAR",
+    "name": "shearing"
+  },
+  {
+    "type": "tool_quality",
     "id": "ANVIL",
     "name": "anvil"
   },

@@ -42,12 +42,16 @@ const efftype_id effect_sheared( "sheared" );
 void monexamine::shear_source( monster &source_mon )
 {
     const auto sheared_item = source_mon.type->starting_ammo;
-    const long wool_per_season = sheared_item.find( "wool_staple" )->second;
+    const auto sheep_wool = sheared_item.find("wool_staple");
+    if (sheep_wool == sheared_item.end()) {
+        return;
+    }
+    const long wool_per_season = sheep_wool->second;
     const time_duration shearing_freq = calendar::season_length();
 
-    item wool_staple( sheared_item.find( "wool_staple" )->first, calendar::turn, wool_per_season );
+    item wool_staple(sheep_wool->first, calendar::turn, wool_per_season);
 
-    if( g->u.i_add( wool_staple ) ) {
+    if (!g->u.i_add(wool_staple).is_null()) {
         add_msg( _( "You shear the %s." ), source_mon.get_name().c_str() );
         source_mon.add_effect( effect_sheared, shearing_freq );
 

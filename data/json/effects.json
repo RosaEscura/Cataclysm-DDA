@@ -1454,6 +1454,13 @@
   },
   {
     "type": "effect_type",
+    "id": "sheared",
+    "name": [ "Sheared" ],
+    "desc": [ "The creature has been fully sheared." ],
+    "max_duration": 2174400
+  },
+  {
+    "type": "effect_type",
     "id": "pkill",
     "name": [ "Painkillers" ],
     "desc": [ "You are under the influence of analgesic substances to relieve pain, but they may numb you a bit." ],

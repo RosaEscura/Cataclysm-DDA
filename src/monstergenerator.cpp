@@ -481,6 +481,7 @@ void MonsterGenerator::init_flags()
     flag_map["BIRDFOOD"] = MF_BIRDFOOD;
     flag_map["DOGFOOD"] = MF_DOGFOOD;
     flag_map["MILKABLE"] = MF_MILKABLE;
+    flag_map["SHEARABLE"] = MF_SHEARABLE;
     flag_map["NO_BREED"] = MF_NO_BREED;
     flag_map["PET_WONT_FOLLOW"] = MF_PET_WONT_FOLLOW;
     flag_map["DRIPS_NAPALM"] = MF_DRIPS_NAPALM;

@@ -2470,7 +2470,7 @@
     "ammo": "battery",
     "initial_charges": 100,
     "max_charges": 100,
-    "charges_per_use": 25,
+    "charges_per_use": 25
   },
   {
     "id": "electrohack",
@@ -8032,7 +8032,7 @@
     "type": "TOOL",
     "category": "spare_parts",
     "name": "wool staple",
-    "description": "The natural cluster of wool fibers.  Could be processed to the felt patches or yarns.",
+    "description": "The natural cluster of wool fibers.  Could be processed into felt patches or yarn.",
     "weight": 200,
     "volume": 2,
     "price": 0,
